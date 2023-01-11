@@ -4,6 +4,7 @@ import config.BaseClass;
 import config.Browsers;
 import config.DriverConfig;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -23,12 +24,9 @@ public class JunitTestWhitDriver extends BaseClass {
 
 
     @Test
-    public void test1() {
-        if ("YouTube".equals(driver.getTitle())) {
-            System.out.println("ok " + driver.getTitle());
-        } else {
-            System.out.println("ERROR " + driver.getTitle());
-        }
+    public void test1() throws Exception {
+        Assert.assertEquals("YouTube",driver.getTitle());
+
     }
 
     @Test

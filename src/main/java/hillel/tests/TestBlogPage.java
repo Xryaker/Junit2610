@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 public class TestBlogPage extends BaseClass {
     //
     static BlogPage blogPage= PageFactory.initElements(driver, BlogPage.class);
-    String mainUrl="https://blog.ithillel.ua/publications/gamedev";
+    String mainUrl="https://blog.ithillel.ua/publications/backend";
 
     @Before
     public  void setUpBeforeTestBlogScreen(){
@@ -19,7 +19,7 @@ public class TestBlogPage extends BaseClass {
             driver.get(mainUrl);}
     }
 
-    @Test
+    @Test(timeout = 500)
     public void test1() throws InterruptedException {
         int i=0;//counter
         while(true){

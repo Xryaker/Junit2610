@@ -8,11 +8,12 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class PracticeForm {
-    By firstName= By.id("firstName");
-    By lastName=By.id("lastName");
-    By emailAdress=By.id("userEmail");
-    By genderWrapper=By.id("genterWrapper");
-    By userNumber=By.id("userNumber");
+    By firstName = By.id("firstName");
+    By lastName = By.id("lastName");
+    By emailAdress = By.id("userEmail");
+    By genderWrapper = By.id("genterWrapper");
+    By userNumber = By.id("userNumber");
+    By buttonPIC = By.xpath("//*[@id=\"uploadPicture\"]");
 
     public PracticeForm(WebDriver driver) {
         this.driver = driver;
@@ -20,10 +21,11 @@ public class PracticeForm {
 
     WebDriver driver;
 
-    public void setFirstName(String name){
+    public void setFirstName(String name) {
         driver.findElement(firstName).sendKeys(name);
     }
-    public void completForm(String name, String lastName, String email, String gender, String tel){
+
+    public void completForm(String name, String lastName, String email, String gender, String tel) {
         driver.findElement(firstName).sendKeys(name);
         driver.findElement(this.lastName).sendKeys(lastName);
         driver.findElement(emailAdress).sendKeys(email);
@@ -31,16 +33,21 @@ public class PracticeForm {
         driver.findElement(userNumber).sendKeys(tel);
     }
 
+    public boolean isButtonEnabled() {
+        return driver.findElement(buttonPIC).isEnabled();
+    }
+
     private void changeGender(String gender) {
-        List<WebElement> genderlistElements=driver.findElement(genderWrapper).findElements(By.tagName("label"));
-        for(WebElement l:genderlistElements){
-            if(l.getText().equals(gender)){
+        List<WebElement> genderlistElements = driver.findElement(genderWrapper).findElements(By.tagName("label"));
+        for (WebElement l : genderlistElements) {
+            if (l.getText().equals(gender)) {
                 l.click();
             }
         }
 
     }
-    public void completForm(User us){
+
+    public void completForm(User us) {
         driver.findElement(firstName).sendKeys(us.getName());
         driver.findElement(this.lastName).sendKeys(us.getLastName());
         driver.findElement(emailAdress).sendKeys(us.getEmail());
