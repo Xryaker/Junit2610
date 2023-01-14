@@ -13,33 +13,33 @@ public class PageTeacher extends BaseClass {
     @FindBy(xpath = "//li[@class=\"block-coaches_item\"]")
     private List<WebElement> listTeachers;
 
-    private List<WebElement> getAllListTechers() throws InterruptedException {
+    private void scrollToEnd(int kol) {
         Scroling.scroll(driver);
         int i = 0;//counter
         while (true) {
-            if (listTeachers.size() > i&&i<=30) {
+            if (listTeachers.size() > i && i <= kol) {
                 i = listTeachers.size();
                 Scroling.scroll(driver);
-                Thread.sleep(2000);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
 
             } else {
                 break;
             }
         }
-        return listTeachers;
+
     }
 
     public void printList() {
-        try {
-            getAllListTechers();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        scrollToEnd(30);
         for (WebElement l : listTeachers) {
             String name = l.findElement(By.className("coach-card_name")).getText();
             String spec = l.findElement(By.className("coach-card_spec")).getText();
-           // System.out.println(name+"  "+spec);
-            System.out.printf("%-25s : %s",name,spec);
+            // System.out.println(name+"  "+spec);
+            System.out.printf("%-25s : %s", name, spec);
         }
     }
 }
